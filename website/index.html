@@ -1,36 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title></title>
-    <link rel="stylesheet">
-  </head>
-  <body onload='getJSON()'>
-    <h2> User emails from XMLHttpRequest:</h2>
-    <p1 id='xmlResult'></p1>
+    <title>Homework 4</title>
+    <link rel="stylesheet" href="main.css" />
 
-    <h2> User Usernames from fetch:</h2>
-    <p1 id='fetchResult'></p1>
+</head>
+<body onload='start()'>
+<h2> User emails from XMLHttpRequest:</h2>
+<p1 id='xmlResult'></p1>
 
-    <script>
+<h2> User Usernames from fetch:</h2>
+<p1 id='fetchResult'></p1>
 
-      function getJSON() {
-        fetch('https://jsonplaceholder.typicode.com/users')
-          .then((res) => {
-            return res.json()
-          })
-          .then((data) => {
-            let result = '';
-            data.forEach((user) => {
-              result += '<em>' + user.username + ', </em>';
+  <script>
+      function getJSONEmail(){
+      fetch('https://jsonplaceholder.typicode.com/users')
+        .then((res) => { return res.json() })
+        .then((data) => { 
+        let result = '';
+        data.forEach((user) => {
+          result += '<em>' + user.email + ', </em>';
 
-              document.getElementById('fetchResult').innerHTML = result;
-            });
-          })
-      }
+          document.getElementById('xmlResult').innerHTML = result;
+        });
+      })         
+    }
+  
+    function getJSONUsername(){
+      fetch('https://jsonplaceholder.typicode.com/users')
+        .then((res) => { return res.json() })
+        .then((data) => { 
+        let result = '';
+        data.forEach((user) => {
+          result += '<em>' + user.username + ', </em>';
 
+          document.getElementById('fetchResult').innerHTML = result;
+        });
+      })         
+    }
+    
+ function start(){
+    getJSONEmail();
+    getJSONUsername();
+}
+    
     </script>
-  </body>
+
+</body>
 </html>
