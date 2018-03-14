@@ -9,45 +9,47 @@
 
 </head>
 <body onload='start()'>
-<h2> User emails from XMLHttpRequest:</h2>
-<p1 id='xmlResult'></p1>
+<h2> User emails:</h2>
+<p1 id='emailResult'></p1>
 
-<h2> User Usernames from fetch:</h2>
-<p1 id='fetchResult'></p1>
+<h2> User Usernames:</h2>
+<p1 id='usernameResult'></p1>
 
   <script>
     function getJSONEmail(){
       fetch('https://jsonplaceholder.typicode.com/users')
         .then((res) => { return res.json() })
         .then((data) => { 
-        let result = '';
+        let result = [];
         let emails = [];
         data.forEach((user) => {
           emails.push(user.email);
         });
         emails.sort();
+        result += '['
         emails.forEach((email) => {
-        	result += '<em>' + email + ', </em>';
-          document.getElementById('xmlResult').innerHTML = result;
+        	result += '<em>' + '"'+ email +'"' + ', </em>';
+          document.getElementById('emailResult').innerHTML = result;
         });
-      });         
+      });
     }
   
     function getJSONUsername(){
       fetch('https://jsonplaceholder.typicode.com/users')
         .then((res) => { return res.json() })
         .then((data) => { 
-        let result = '';
+        let result = [];
         let userNames = [];
+        result += '['
         data.forEach((user) => {
-          userNames.push(user.username);
+          userNames.push(user.name);
         });
         userNames.sort(function(a, b){
         	  return -b.length + a.length;
 				});
         userNames.forEach((username) => {
-        	result += '<em>' + username + ', </em>';
-          document.getElementById('fetchResult').innerHTML = result;
+        	result += '<em>' + '"' + username + '"' + ', </em>';
+          document.getElementById('usernameResult').innerHTML = result;
         });
       });         
     }
